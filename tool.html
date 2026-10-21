@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>בדיקת תוכנית גפ״ן</title>
+<meta name="description" content="מה המנהלת רואה כשהיא פותחת את התוכנית שלך בגפ״ן: שש בדיקות, מחשבון תוכנית שנתית ומפת נישות.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Crect x='1' y='1' width='24' height='24' rx='6' fill='%232741d8'/%3E%3Cpath d='M7.5 13.5l3.6 3.6L18.5 9.4' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="brand" href="index.html">
+    <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="1" y="1" width="24" height="24" rx="6" fill="#2741d8"/><path d="M7.5 13.5l3.6 3.6L18.5 9.4" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-brand>בודק תוכניות גפ״ן</span>
+  </a>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="תפריט"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <nav class="nav" id="nav" aria-label="ראשי">
+    <a href="index.html">דף הבית</a>
+    <a href="tool.html">בדיקת תוכנית</a>
+    <a href="services.html">שירותים</a>
+    <a href="about.html">אודות</a>
+    <a href="contact.html">צור קשר</a>
+    <a class="btn" href="contact.html" data-book="nav">לקביעת זום</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <div class="tool-hero">
+    <div class="tabs" role="tablist" aria-label="כלים">
+      <button role="tab" id="tab-check" aria-selected="true" aria-controls="view-check">בדיקת תוכנית</button>
+      <button role="tab" id="tab-map" aria-selected="false" aria-controls="view-map">מפת נישות</button>
+    </div>
+  </div>
+
+  <section id="view-check" role="tabpanel" aria-labelledby="tab-check">
+    <div class="tool-hero" style="padding-top:0">
+      <h1>מה המנהלת רואה כשהיא פותחת את התוכנית שלך בגפ״ן</h1>
+      <p class="sub">שש בדיקות של הדף, כמה שווה לך תוכנית שנתית, ומה להגיד למנהלת כבר עכשיו.</p>
+      <div class="searchbox" id="searchbox">
+        <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="text" id="q" autocomplete="off" aria-label="חיפוש תוכנית" placeholder="שם התוכנית, שם הארגון או מספר התוכנית" disabled>
+        <div class="results" id="results" hidden></div>
+      </div>
+      <div class="examples"><span>תוכניות לדוגמה:</span><span id="samples" style="display:contents"></span></div>
+      <p style="margin:16px 0 0"><button class="textlink" id="own-toggle" aria-expanded="false">התוכנית שלי עוד לא במאגר</button></p>
+      <form id="own" class="own" hidden>
+        <div class="grid2">
+          <label class="fl" for="own-name">שם התוכנית<input type="text" id="own-name"></label>
+          <label class="fl" for="own-sb">תת-סל מענה<select id="own-sb"></select></label>
+        </div>
+        <label class="fl" for="own-sm">תקציר<textarea id="own-sm" placeholder="הדבק כאן את התקציר כפי שהוא יופיע במאגר"></textarea></label>
+        <div class="grid2">
+          <div class="fl">שלב חינוך<div class="cbx" id="own-st"></div></div>
+          <div class="fl">מגזר<div class="cbx" id="own-sc"></div></div>
+          <div class="fl">מספר מפגשים<div class="cbx" id="own-ss"></div></div>
+        </div>
+        <div><button class="btn" type="submit">בדוק את הטקסט</button></div>
+      </form>
+    </div>
+    <div id="report"><p class="loading" id="loading">טוען את מאגר התוכניות…</p></div>
+  </section>
+
+  <section id="view-map" role="tabpanel" aria-labelledby="tab-map" hidden>
+    <div class="tool-hero" style="padding-top:0">
+      <h1>איפה יש מקום לתוכנית חדשה</h1>
+      <p class="sub">כמה תוכניות כבר מתחרות בכל שילוב של שלב חינוך ומגזר. משבצת בהירה פירושה פחות תחרות.</p>
+    </div>
+    <div id="mapfocus" class="opp mapfocus" hidden></div>
+    <div class="filters">
+      <label class="fl" for="m-sb">תת-סל מענה<select id="m-sb"></select></label>
+      <label class="fl" for="m-tg">קהל יעד<select id="m-tg"></select></label>
+      <div class="colsw"><span>עמודות</span><div class="tabs"><button class="toggle" data-col="sc" aria-pressed="true">מגזר</button><button class="toggle" data-col="sp" aria-pressed="false">סוג פיקוח</button></div></div>
+    </div>
+    <div class="maphead"><h2 id="m-title">כל התחומים</h2><span id="m-total"></span></div>
+    <div class="heat-wrap"><table class="heat" id="heat"></table></div>
+    <div class="legend">
+      <span>מספר תוכניות</span><span class="ramp" id="ramp"></span><span id="ramp-lbl"></span>
+      <span><span class="opp-key"></span>פנויה יחסית (רבע תחתון בטבלה)</span>
+    </div>
+    <p class="mapnote">כל התוכניות נספרות, גם אלה שעוד לא קיבלו חוות דעת. תוכנית שמתאימה לכמה מגזרים או שלבים נספרת בכל משבצת שלה. תוכניות לצוות חינוכי, להורים ולמנהלים רשומות במאגר בלי שלב חינוך, ולכן יש להן שורה משלהן. הציון בכל משבצת הוא ממוצע של התוכניות שקיבלו חוות דעת בלבד.</p>
+    <h2 class="listhead" id="m-list-title">בחר משבצת כדי לראות את התוכניות בה</h2>
+    <div class="plist" id="m-list"></div>
+  </section>
+</main>
+<div class="stickybar" id="stickybar"><span id="sticky-text">רוצה לבנות את זה יחד?</span><a class="btn" href="contact.html" data-book="sticky">לקביעת זום</a></div>
+
+<footer class="site"><div class="wrap">
+  <p><span data-brand>בודק תוכניות גפ״ן</span>. <span data-updated></span>. הבדיקות משקפות הערכה מקצועית, ולא החלטה של משרד החינוך. האתר אינו קשור למשרד החינוך.</p>
+  <nav aria-label="תחתון"><a href="index.html">דף הבית</a><a href="tool.html">בדיקת תוכנית</a><a href="services.html">שירותים</a><a href="about.html">אודות</a><a href="contact.html">צור קשר</a></nav>
+</div></footer>
+<script src="assets/tool.js"></script>
+</body>
+</html>
