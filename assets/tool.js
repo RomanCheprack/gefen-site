@@ -50,9 +50,9 @@ function ensureDetails(p){
   if(p.own || p.sm!==undefined) return Promise.resolve(p);
   const k=Number(p.id)%SHARDS;
   shardCache[k] = shardCache[k] || fetch(`data/details/${k}.json`).then(r=>{ if(!r.ok) throw new Error("details"); return r.json(); });
-  return shardCache[k].then(s=>{ const d=s[p.id]||{}; p.sm=d.sm||""; p.gl=d.gl||""; p.sk=d.sk||[]; return p; });
+  return shardCache[k].then(s=>{ const d=s[p.id]||{}; p.sm=d.sm||""; p.gl=d.gl||""; p.sk=d.sk||[]; p.ai=d.ai||null; return p; });
 }
-const sampleOf = p => p.own ? null : (SAMPLES[pid(p)] || null);
+const sampleOf = p => p.own ? null : (p.ai || SAMPLES[pid(p)] || null);
 function init(){
   $("#q").disabled=false;
   $("#samples").innerHTML = Object.keys(SAMPLES).filter(k=>byId[k]).map(k=>{const p=byId[k];return `<button class="ex" data-id="${esc(pid(p))}" title="${esc(p.o)}">${esc(p.n.split(/[:\-–]/)[0].trim())}</button>`}).join("");
@@ -242,7 +242,7 @@ function renderReport(p){
         </div>
       </section>
 
-      ${ai&&ai.rewrite?`<section class="rewrite">
+      ${ai&&ai.rewrite&&S.showRewrite!==false?`<section class="rewrite">
         <span class="lbl">שם ושורה ראשונה מוצעים. אפשר להשתמש בהם כבר עכשיו בהצעה למנהלת, ולעדכן בגפ״ן בחלון ההגשה הבא.</span>
         <div class="nm">${esc(ai.rewrite.name)}</div>
         <p>${esc(ai.rewrite.line)}</p>
